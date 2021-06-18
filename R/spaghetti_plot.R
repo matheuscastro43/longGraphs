@@ -27,4 +27,4 @@ spaghetti_plot = function(dataf, id, x, y, group, xlab = NULL, ylab = NULL,
     theme(plot.tag.position = "topright", plot.tag =
             element_text(size = 5, angle = 90))
 }
-´
+

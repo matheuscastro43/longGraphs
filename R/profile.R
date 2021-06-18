@@ -1,5 +1,5 @@
 #' @import ggplot2
-#' @export profile
+#' @export
 profile = function(dataset, response, index, id, group = NA, legend = "group", nGroups = NULL, dolTheme = TRUE){
   response = as.character(substitute(response))
   index = as.character(substitute(index))

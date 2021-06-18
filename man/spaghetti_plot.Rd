@@ -1,14 +1,15 @@
-\name{profile}
-\alias{profile}
+\name{spaghetti_plot}
+\alias{spaghetti_plot}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Profile plots
+\title{Spaghetti plots
 %%  ~~function to do ... ~~
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-profile(dataset, response, index, id, group = NA, legend = "group", nGroups = NULL, dolTheme = TRUE)
+spaghetti_plot(dataf, id, x, y, group, xlab = NULL, ylab = NULL,
+               legend.title = NULL, legend.labels = NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

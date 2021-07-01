@@ -1,30 +1,34 @@
+#' @importFrom magrittr %<>%
+#' @importFrom magrittr %$%
 #' @import dplyr
+#' @importFrom tidyr pivot_longer
 #' @import ggplot2
-#' @import ggthemes
+#' @importFrom ggthemes theme_calc
 #' @export
-spaghetti_plot = function(dataf, id, x, y, group, xlab = NULL, ylab = NULL,
-                          legend.title = NULL, legend.labels = NULL){
-  x <- as.character(substitute(x))
-  y <- as.character(substitute(y))
-  id <- as.character(substitute(id))
-  groupp <- as.character(substitute(group))
+spaghetti_plot <- function(dataf, id, x, y, group, funcs = NULL, xlab = NULL,
+                            ylab = NULL, legend.title = NULL,
+                            legend.labels = NULL){
+  dataf %<>% as_tibble
 
-  tibble(dataf) %>%
-    ggplot() +
-    aes_string(x = x, y = y) +
-    geom_line(aes_string(group = id, color = groupp)) +
-    geom_point(aes_string(group = id, color = groupp)) +
-    geom_line(data = . %>% group_by_at(x) %>%
-                summarise_at(.vars = y, .funs = mean),
-              aes_string(y = y), size = 1) +
+  p <- dataf %>%
+    ggplot +
+    aes(x = {{x}}, y = {{y}}) +
+    geom_line(aes(group = {{id}}, color = {{group}})) +
+    geom_point(aes(group = {{id}}, color = {{group}})) +
     theme_calc() +
     labs(x = if(is.null(xlab)){waiver()}else{xlab},
          y = if(is.null(ylab)){waiver()}else{ylab},
-         color = if(is.null(legend.title)){waiver()}else{legend.title},
-         tag = "By: longGraphs") +
+         color = if(is.null(legend.title)){waiver()}else{legend.title}) +
     scale_color_discrete(
       labels = if(is.null(legend.labels)){waiver()}else{legend.labels}) +
-    theme(plot.tag.position = "topright", plot.tag =
-            element_text(size = 5, angle = 90))
-}
+    theme(legend.title = element_text(hjust = 0.5, size = 12))
 
+  if(!is.null(funcs)){
+    auxt <- dataf %>%
+      group_by({{x}}) %>%
+      summarise(across({{y}}, funcs)) %>%
+      pivot_longer(cols = -{{x}})
+    p +
+      geom_line(data = auxt, aes(x = {{x}}, y = value, group = name))
+  }else p
+}

@@ -3,4 +3,7 @@
 export(spaghetti_plot)
 import(dplyr)
 import(ggplot2)
-import(ggthemes)
+importFrom(ggthemes,theme_calc)
+importFrom(magrittr,"%$%")
+importFrom(magrittr,"%<>%")
+importFrom(tidyr,pivot_longer)

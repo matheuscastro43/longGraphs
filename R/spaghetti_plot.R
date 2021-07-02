@@ -1,13 +1,15 @@
 #' @importFrom magrittr %<>%
 #' @importFrom magrittr %$%
+#' @importFrom tibble deframe
+#' @importFrom rlang as_string
 #' @import dplyr
 #' @importFrom tidyr pivot_longer
 #' @import ggplot2
 #' @importFrom ggthemes theme_calc
 #' @export
-spaghetti_plot <- function(dataf, id, x, y, group, funcs = NULL, xlab = NULL,
-                            ylab = NULL, legend.title = NULL,
-                            legend.labels = NULL){
+spaghetti_plot <- function(dataf, id, x, y, group = NULL, grid = NULL,
+                            funcs = NULL, xlab = NULL, ylab = NULL,
+                            legend.title = NULL, legend.labels = NULL){
   dataf %<>% as_tibble
 
   p <- dataf %>%
@@ -15,6 +17,7 @@ spaghetti_plot <- function(dataf, id, x, y, group, funcs = NULL, xlab = NULL,
     aes(x = {{x}}, y = {{y}}) +
     geom_line(aes(group = {{id}}, color = {{group}})) +
     geom_point(aes(group = {{id}}, color = {{group}})) +
+    facet_grid(grid) +
     theme_calc() +
     labs(x = if(is.null(xlab)){waiver()}else{xlab},
          y = if(is.null(ylab)){waiver()}else{ylab},

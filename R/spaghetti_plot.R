@@ -6,8 +6,8 @@
 #' @importFrom ggthemes theme_calc
 #' @export
 spaghetti_plot <- function(dataf, id, x, y, group, funcs = NULL, xlab = NULL,
-                            ylab = NULL, legend.title = NULL,
-                            legend.labels = NULL){
+                           ylab = NULL, legend.title = NULL,
+                           legend.labels = NULL){
   dataf %<>% as_tibble
 
   p <- dataf %>%

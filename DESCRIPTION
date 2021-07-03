@@ -1,18 +1,23 @@
 Package: longGraphs
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Longitudinal Graphs
+Version: 0.0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Matheus",
+           family = "Castro",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "mtcastro43@gmail.com",
+           comment = c(ORCID = "0000-0001-7879-7089"))
+Description: Package to make elegant longitudinal graphics as easy as they 
+    should be. The entire package was built using ggplot2 functions.
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 Imports: dplyr,
          ggplot2,
-         ggthemes
+         ggthemes,
+         magrittr,
+         rlang,
+         tibble,
+         tidyr
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

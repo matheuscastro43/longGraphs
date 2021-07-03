@@ -8,8 +8,8 @@
 #' @importFrom ggthemes theme_calc
 #' @export
 spaghetti_plot <- function(dataf, id, x, y, group = NULL, grid = NULL,
-                            funcs = NULL, xlab = NULL, ylab = NULL,
-                            legend.title = NULL, legend.labels = NULL){
+                           funcs = NULL, xlab = NULL, ylab = NULL,
+                           legend_title = NULL, legend_labels = NULL) {
   dataf %<>% as_tibble
 
   p <- dataf %>%
@@ -19,19 +19,35 @@ spaghetti_plot <- function(dataf, id, x, y, group = NULL, grid = NULL,
     geom_point(aes(group = {{id}}, color = {{group}})) +
     facet_grid(grid) +
     theme_calc() +
-    labs(x = if(is.null(xlab)){waiver()}else{xlab},
-         y = if(is.null(ylab)){waiver()}else{ylab},
-         color = if(is.null(legend.title)){waiver()}else{legend.title}) +
+    labs(x = if (is.null(xlab)) {
+      waiver()
+    } else {
+      xlab
+    },
+    y = if (is.null(ylab)) {
+      waiver()
+    } else {
+      ylab
+    },
+    color = if (is.null(legend_title)) {
+      waiver()
+    } else {
+      legend_title
+    }) +
     scale_color_discrete(
-      labels = if(is.null(legend.labels)){waiver()}else{legend.labels}) +
-    theme(legend.title = element_text(hjust = 0.5, size = 12))
+      labels = if (is.null(legend_labels)) {
+        waiver()
+      } else {
+        legend_labels
+      }) +
+    theme(legend_title = element_text(hjust = 0.5, size = 12))
 
-  if(!is.null(funcs)){
+  if (!is.null(funcs)) {
     auxt <- dataf %>%
       group_by({{x}}) %>%
       summarise(across({{y}}, funcs)) %>%
       pivot_longer(cols = -{{x}})
     p +
       geom_line(data = auxt, aes(x = {{x}}, y = value, group = name))
-  }else p
+  } else p
 }

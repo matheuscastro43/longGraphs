@@ -1,15 +1,21 @@
 Package: longGraphs
 Title: Longitudinal Graphs
-Version: 0.0.1
+Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Matheus",
+    c(person(given = "Matheus",
            family = "Castro",
            role = c("aut", "cre"),
            email = "mtcastro43@gmail.com",
-           comment = c(ORCID = "0000-0001-7879-7089"))
+           comment = c(ORCID = "0000-0001-7879-7089")),
+      person(given = "Keyliane",
+             family = "Travassos",
+             role = "ctb",
+             email = "keylianetravasso@gmail.com"))
 Description: Package to make elegant longitudinal graphics as easy as they 
     should be. The entire package was built using ggplot2 functions.
 License: GPL (>= 3) + file LICENSE
+URL: https://github.com/matheuscastro43/longGraphs
+BugReports: https://github.com/matheuscastro43/longGraphs/issues
 Encoding: UTF-8
 Imports: dplyr,
          ggplot2,

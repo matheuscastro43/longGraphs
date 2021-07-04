@@ -40,7 +40,7 @@ spaghetti_plot <- function(dataf, id, x, y, group = NULL, grid = NULL,
       } else {
         legend_labels
       }) +
-    theme(legend_title = element_text(hjust = 0.5, size = 12))
+    theme(legend.title = element_text(hjust = 0.5, size = 12))
 
   if (!is.null(funcs)) {
     auxt <- dataf %>%

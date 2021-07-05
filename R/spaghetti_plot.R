@@ -22,9 +22,9 @@
 #'     (\href{https://orcid.org/0000-0001-7879-7089}{ORCID}).
 #'
 #' @examples
-#' spaghetti_plot(PotRoy, Individual, Age, Distance, Sex, xlab = "Age (years)",
+#' spaghetti_plot(PotRoy, individual, age, distance, sex, xlab = "Age (years)",
 #'                ylab = "Distance (cm)", legend_title = "Sex",
-#'                legend_labels = c("Female", "Male"), wrap = ~Sex,
+#'                legend_labels = c("Female", "Male"), wrap = ~sex,
 #'                funcs = mean)
 #'
 #' @importFrom magrittr %<>%

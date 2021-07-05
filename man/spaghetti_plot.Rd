@@ -51,9 +51,9 @@ A \code{\link[ggplot2]{ggplot}} object with the plot.
 Function to make a Spaghetti Plot using Grammar of Graphics.
 }
 \examples{
-spaghetti_plot(PotRoy, Individual, Age, Distance, Sex, xlab = "Age (years)",
+spaghetti_plot(PotRoy, individual, age, distance, sex, xlab = "Age (years)",
                ylab = "Distance (cm)", legend_title = "Sex",
-               legend_labels = c("Female", "Male"), wrap = ~Sex,
+               legend_labels = c("Female", "Male"), wrap = ~sex,
                funcs = mean)
 
 }

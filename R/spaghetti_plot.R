@@ -29,6 +29,7 @@
 #'
 #' @importFrom magrittr %<>%
 #' @importFrom magrittr %$%
+#' @importFrom tibble is_tibble
 #' @import dplyr
 #' @importFrom tidyr pivot_longer
 #' @import ggplot2
@@ -39,13 +40,14 @@
 spaghetti_plot <- function(dataf, id, x, y, group = NULL, wrap = NULL,
                            mfrow = NULL, funcs = NULL, xlab = NULL, ylab = NULL,
                            legend_title = NULL, legend_labels = NULL) {
-  dataf %<>% as_tibble
+  if(!is_tibble(dataf))
+    dataf %<>% as_tibble
 
   p <- dataf %>%
     ggplot +
-    aes(x = {{x}}, y = {{y}}) +
-    geom_line(aes(group = {{id}}, color = {{group}})) +
-    geom_point(aes(group = {{id}}, color = {{group}})) +
+    aes(x = {{x}}, y = {{y}}, group = {{id}}) +
+    geom_line(aes(color = {{group}})) +
+    geom_point(aes(color = {{group}})) +
     facet_wrap(wrap, nrow = mfrow[1], ncol = mfrow[2]) +
     theme_calc() +
     labs(x = if (is.null(xlab)) {
@@ -70,6 +72,11 @@ spaghetti_plot <- function(dataf, id, x, y, group = NULL, wrap = NULL,
         legend_labels
       }) +
     theme(legend.title = element_text(hjust = 0.5, size = 12))
+
+  if (is.null(wrap)) {
+    p <- p +
+      theme(strip.background = element_blank(), strip.text = element_blank())
+  }
 
   if (!is.null(funcs)) {
     auxt <- dataf %>%
